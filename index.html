@@ -327,6 +327,30 @@
 // =============================================
 const KB = [
   {
+    keys: ['inauguracion','inauguración','ceremonia','apertura','inicio','arranque'],
+    resp: `<strong>Ceremonia de Inauguración</strong><br><br>
+19 de octubre de 2026<br>
+12:00-13:00<br>
+Centro Cultural`
+  },
+  {
+    keys: ['conferencia','conferencias','magistral','magistrales','ponente','ponentes','enrique galindo','victor barrera','víctor barrera','antonio de leon','antonio de león','luis herrera'],
+    resp: `<strong>Conferencias Magistrales</strong><br><br>
+1. 50 años de Ingeniería Bioquímica<br>
+Dr. Enrique Galindo Fentanes<br>
+19 de octubre 13:00-14:00<br><br>
+2. Día de muertos: Origen y simbolismo<br>
+Dr. Víctor Barrera Patiño<br>
+20 de octubre 13:00-14:00<br><br>
+3. Contaminantes emergentes desde la industria hasta sus efectos celulares y moleculares<br>
+Dr. Antonio de León Rodríguez<br>
+22 de octubre 13:00-14:00<br><br>
+4. El desarrollo de la biotecnología su presente y futuro<br>
+Dr. Luis Herrera Estrella<br>
+23 de octubre 12:00-13:00<br><br>
+Centro Cultural`
+  },
+  {
     keys: ['matutino','matutinos','mañana','m1','m2','m3','m4','m5','bioestimulantes','leche','lacteos','lácteos','carne','microorganismos','inocuidad','saneamiento'],
     resp: `<strong>Cursos Matutinos 🌅</strong><br><br>
 Horario general: 19, 20, 22 y 23 de octubre, 09:00-13:00<br><br>
@@ -410,29 +434,6 @@ Paulina Espinoza Pérez Grovas, Asesor en Finanzas Allianz México<br><br>
 ¿Cuál te interesa más?`
   },
   {
-    keys: ['inauguracion','inauguración','ceremonia','apertura','inicio','arranque'],
-    resp: `<strong>Ceremonia de Inauguración</strong><br><br>
-19 de octubre de 2026 12:00-13:00<br>
-Centro Cultural`
-  },
-  {
-    keys: ['conferencia','conferencias','magistral','magistrales','ponente','ponentes','enrique galindo','victor barrera','víctor barrera','antonio de leon','antonio de león','luis herrera'],
-    resp: `<strong>Conferencias Magistrales</strong><br><br>
-1. 50 años de Ingeniería Bioquímica<br>
-Dr. Enrique Galindo Fentanes<br>
-19 de octubre 13:00-14:00<br><br>
-2. Día de muertos: Origen y simbolismo<br>
-Dr. Víctor Barrera Patiño<br>
-20 de octubre 13:00-14:00<br><br>
-3. Contaminantes emergentes desde la industria hasta sus efectos celulares y moleculares<br>
-Dr. Antonio de León Rodríguez<br>
-22 de octubre 13:00-14:00<br><br>
-4. El desarrollo de la biotecnología su presente y futuro<br>
-Dr. Luis Herrera Estrella<br>
-23 de octubre 12:00-13:00<br><br>
-Centro Cultural`
-  },
-  {
     keys: ['trabajos libres','oral','orales','carteles','poster','póster','mesa','mesas','resumenes','resúmenes','extenso','revista'],
     resp: `<strong>Trabajos Libres</strong><br><br>
 21 de octubre 2026<br><br>
@@ -488,7 +489,7 @@ Tamboreada, antojitos mexicanos, música y bailes folclóricos<br><br>
 • Público en General: <strong>$550</strong>`
   },
   {
-    keys: ['souvenir','souvenirs','recuerdo','recuerdos','termo','taza','bata','playera','pin','regalo','mercancia','mercancía','producto','articulo','artículo'],
+    keys: ['souvenir','souvenirs','recuerdo','recuerdos','termo','taza','bata','playera','pin','regalo','mercancia','mercancía','producto'],
     resp: `<strong>Souvenirs Conmemorativos 🎁</strong><br><br>
 <span class="tag">Termo</span> $300<br>
 <span class="tag">Taza grande</span> $350<br>
@@ -545,7 +546,7 @@ Sedes según actividad:<br>
 Puedo ayudarte con información sobre:<br>
 • 📚 Cursos matutinos y vespertinos<br>
 • 🔧 Talleres Hard y Soft Skills<br>
-• 🎤 Conferencias magistrales<br>
+• 🎤 Ceremonia de Inauguración y Conferencias Magistrales<br>
 • 🧪 Trabajos libres y foros<br>
 • 🏃 Eventos deportivos y culturales<br>
 • 🎁 Souvenirs y 💰 precios<br>
@@ -563,12 +564,13 @@ Puedo ayudarte con información sobre:<br>
 • Estudiantes: $950 | Público: $1,200<br><br>
 🌤️ <strong>Vespertinos (V1–V5)</strong><br>
 • Estudiantes: $650 | Público: $900<br><br>
-También hay conferencias magistrales, trabajos libres, foros y eventos especiales.<br><br>
+También hay ceremonia de inauguración, conferencias magistrales, trabajos libres, foros y eventos especiales.<br><br>
 ¿Cuál modalidad te interesa más?`
   },
   {
     keys: ['evento','eventos','actividad','actividades','que hay','qué hay','que tiene','qué tiene','programa completo'],
     resp: `<strong>Programa General del Congreso 🎓</strong><br><br>
+🎉 Ceremonia de Inauguración<br>
 📚 Cursos Matutinos (M1–M5)<br>
 🌆 Cursos Vespertinos (V1–V5)<br>
 🔧 Talleres Hard Skills<br>
@@ -609,7 +611,7 @@ function findAnswer(q) {
   if (best && bestScore > 0) return best.resp;
 
   return `Lo siento, no tengo información sobre eso. 🤔<br><br>
-Puedo ayudarte con cursos, talleres, conferencias, trabajos libres, foros, eventos deportivos, culturales, souvenirs, costos y registro.<br>
+Puedo ayudarte con ceremonia de inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos deportivos, culturales, souvenirs, costos y registro.<br>
 ¿Quieres que te explique alguno de esos temas?`;
 }
 
@@ -687,7 +689,7 @@ inputEl.addEventListener('input', function() {
 // Mensaje de bienvenida
 setTimeout(() => {
   addMsg(`¡Bienvenido al congreso! 🎓 Soy tu asistente para el <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
-Estoy aquí para resolver tus dudas sobre cursos, talleres, eventos, costos e inscripciones. ¿Por dónde empezamos?`, 'bot');
+Estoy aquí para resolver tus dudas sobre inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos, costos e inscripciones. ¿Por dónde empezamos?`, 'bot');
 }, 400);
 </script>
 </body>
