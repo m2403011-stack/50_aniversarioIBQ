@@ -381,443 +381,167 @@
 
   <p class="footer-note">Sin internet - Sin API - 100% local</p>
 
-  <script>
-    const KB = [
-      {
-        keys: ['inauguracion', 'inauguración', 'ceremonia', 'apertura', 'inicio', 'arranque'],
-        resp: `<strong>Ceremonia de inauguración</strong><br><br>
-        19 de octubre de 2026<br>
-        12:00-13:00<br>
-        Centro Cultural`
-      },
-      {
-        keys: ['conferencia', 'conferencias', 'magistral', 'magistrales', 'ponente', 'ponentes', 'enrique galindo', 'victor barrera', 'víctor barrera', 'antonio de leon', 'antonio de león', 'luis herrera'],
-        resp: `<strong>Conferencias magistrales</strong><br><br>
-        1. 50 años de Ingeniería Bioquímica<br>
-        Dr. Enrique Galindo Fentanes<br>
-        19 de octubre, 13:00-14:00<br><br>
+ }
 
-        2. Día de muertos: origen y simbolismo<br>
-        Dr. Víctor Barrera Patiño<br>
-        20 de octubre, 13:00-14:00<br><br>
+También te recomiendo reemplazar tu bloque JavaScript completo por este, ya corregido y estable:
 
-        3. Contaminantes emergentes: desde la industria hasta sus efectos celulares y moleculares<br>
-        Dr. Antonio de León Rodríguez<br>
-        22 de octubre, 13:00-14:00<br><br>
+<script>
+const KB = [
+  {
+    keys: ['inauguracion','inauguración','ceremonia','apertura','inicio','arranque'],
+    resp: `<strong>Ceremonia de inauguración</strong><br><br>
+    19 de octubre de 2026<br>
+    12:00-13:00<br>
+    Centro Cultural`
+  },
+  {
+    keys: ['registro','inscripcion','inscripción','inscribir','inscribirme','form','formulario','link','enlace','google form','forms'],
+    resp: `<strong>Registro e inscripciones</strong><br><br>
+    Accede al formulario oficial aquí:<br><br>
+    <a href="https://forms.gle/bwfAZFvtujNbSKN56" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/bwfAZFvtujNbSKN56</a><br><br>
+    No pierdas tu lugar. El evento es del <strong>19 al 23 de octubre de 2026</strong>.`
+  },
+  {
+    keys: ['costo','costos','precio','precios','cuanto','cuánto','vale','cuesta','pagar','pago','dinero','tarifa'],
+    resp: `<strong>Resumen de costos</strong><br><br>
+    <strong>Cursos matutinos</strong><br>
+    Estudiantes: $950 | Público: $1,200<br><br>
+    <strong>Cursos vespertinos</strong><br>
+    Estudiantes: $650 | Público: $900<br><br>
+    <strong>Talleres prácticos</strong><br>
+    Estudiantes: $1,500 | Público: $1,700<br><br>
+    <strong>Talleres de habilidades blandas</strong><br>
+    Estudiantes: $800 | Público: $1,000<br><br>
+    <strong>Carrera conmemorativa</strong><br>
+    Estudiantes: $450 | Público: $550<br><br>
+    <strong>Cena mexicana</strong><br>
+    Estudiantes: $400 | Público: $550`
+  },
+  {
+    keys: ['hola','buenas','buenos','hey','saludos'],
+    resp: `Hola. Bienvenido al asistente oficial del <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
+    ¿Sobre qué quieres saber?`
+  }
+];
 
-        4. El desarrollo de la biotecnología: su presente y futuro<br>
-        Dr. Luis Herrera Estrella<br>
-        23 de octubre, 12:00-13:00<br><br>
+function normalize(txt) {
+  return txt
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
-        Centro Cultural`
-      },
-      {
-        keys: ['matutino', 'matutinos', 'mañana', 'm1', 'm2', 'm3', 'm4', 'm5', 'bioestimulantes', 'leche', 'lacteos', 'lácteos', 'carne', 'microorganismos', 'inocuidad', 'saneamiento'],
-        resp: `<strong>Cursos matutinos</strong><br><br>
-        Horario general: 19, 20, 22 y 23 de octubre, 09:00-13:00<br><br>
+function findAnswer(q) {
+  const nq = normalize(q);
+  let best = null;
+  let bestScore = 0;
 
-        <span class="tag">M1</span> Bioestimulantes agrícolas: principios, aplicaciones y tendencias<br>
-        Dr. Ramón Gerardo Guevara González, UAQ<br><br>
+  for (const item of KB) {
+    let score = 0;
 
-        <span class="tag">M2</span> Ciencia y tecnología de la leche y productos lácteos<br>
-        Dra. Mirna L. Gigante, Campinas, Brasil<br><br>
-
-        <span class="tag">M3</span> Hablando de carne: somos mais com carne<br>
-        Dr. Sérgio Bertelli Pflanzer, Campinas, Brasil<br><br>
-
-        <span class="tag">M4</span> Aspectos fisiológicos de la interacción planta-microorganismos<br>
-        Dra. Aline Coqueiro, Paraná, Brasil<br><br>
-
-        <span class="tag">M5</span> Enfoques modernos para el saneamiento y la inocuidad de alimentos<br>
-        Dr. Alejandro Castillo Ayala, Texas, EUA<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$950</strong><br>
-        Público en general: <strong>$1,200</strong>`
-      },
-      {
-        keys: ['vespertino', 'vespertinos', 'tarde', 'v1', 'v2', 'v21', 'v22', 'v23', 'v24', 'v3', 'v4', 'v5', 'biotecnologia', 'biotecnología', 'bioquimico', 'bioquímico', 'microbios', 'cromatografia', 'cromatografía', 'ia', 'iot'],
-        resp: `<strong>Cursos vespertinos</strong><br><br>
-        Horario general: 19, 20, 21 y 22 de octubre, 15:00-19:00<br><br>
-
-        <span class="tag">V1</span> El poder de la biotecnología<br>
-        Dr. Guillermo Antonio Silva Martínez, TecNM Celaya<br><br>
-
-        <span class="tag">V2</span> Yo soy bioquímico<br>
-        <span class="tag">V21</span> Aplicaciones de la biotecnología en la solución de problemas agrícolas<br>
-        Dr. José Luis Anaya López, INIFAP Bajío<br>
-        <span class="tag">V22</span> ¿Cómo emprender proyectos con base tecnológica?<br>
-        Dra. Sandra Isabel González Morales, Hados Biotec<br>
-        <span class="tag">V23</span> El ingeniero bioquímico en los retos de la industria cárnica<br>
-        IBQ Francisco Javier Balderas Almanza, JB-Delicatessen<br>
-        <span class="tag">V24</span> Importancia de los ingredientes en la industria alimentaria moderna<br>
-        IBQ Erika Zamacona Gutiérrez, Asesor Industrial<br><br>
-
-        <span class="tag">V3</span> De cazadores de microbios a cazadores moleculares<br>
-        Dr. Humberto Ramírez Medina, TecNM Celaya<br>
-        Dr. Luis R. Rodríguez Ortiz<br><br>
-
-        <span class="tag">V4</span> Agricultura climáticamente resiliente: aprovechando las tecnologías emergentes IA e IoT<br>
-        Dra. Ma. del Carmen Orozco Mosqueda, TecNM Celaya<br><br>
-
-        <span class="tag">V5</span> Curso y taller de cromatografía<br>
-        MC José Ramón Castellanos Castro, TecNM Celaya<br>
-        MC Teresa Maldonado Mancera, TecNM Celaya<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$650</strong><br>
-        Público en general: <strong>$900</strong>`
-      },
-      {
-        keys: ['hard skill', 'hard skills', 'taller hard', 'cerveza', 'carnicos', 'cárnicos', 'tv2', 'tv3', 'talleres practicos', 'talleres prácticos', 'cosmeticos', 'cosméticos'],
-        resp: `<strong>Talleres prácticos</strong><br><br>
-
-        <span class="tag">TV2</span> Taller de elaboración de cerveza artesanal<br>
-        Dr. Ahuízotl de Jesús Joaquín Ramos, TecNM Roque<br><br>
-
-        <span class="tag">TV3</span> Taller de elaboración de productos cárnicos<br>
-        Dra. Soraya Covarrubias Carapia, TecNM Celaya<br>
-        Ing. Martha Tierra Blanca, TecNM Celaya<br><br>
-
-        <span class="tag">TM3</span> Taller de productos cosméticos<br>
-        Mtra. Ruth Trejo Tasha Nicolle<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$1,500</strong><br>
-        Público en general: <strong>$1,700</strong>`
-      },
-      {
-        keys: ['soft skill', 'soft skills', 'taller soft', 'emocional', 'inteligencia emocional', 'educacion financiera', 'educación financiera', 'imagen', 'bata', 'tm1', 'tm2', 'tv1', 'talleres habilidades blandas', 'talleres de habilidades blandas'],
-        resp: `<strong>Talleres de habilidades blandas</strong><br><br>
-
-        <strong>Matutinos (19, 20, 22 y 23 de octubre, 09:00-13:00)</strong><br>
-        <span class="tag">TM1</span> Inteligencia emocional<br>
-        Mtra. Mercedes García Pescador, U. Gto.<br><br>
-
-        <span class="tag">TM2</span> Más que tu bata, tu imagen habla por ti<br>
-        Mtra. Araceli Cano Belman, TecNM Celaya<br><br>
-
-        <strong>Vespertinos (19, 20, 21 y 22 de octubre, 15:00-19:00)</strong><br>
-        <span class="tag">TV1</span> Educación financiera<br>
-        Paulina Espinoza Pérez Grovas, Asesor en Finanzas Allianz México<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$800</strong><br>
-        Público en general: <strong>$1,000</strong>`
-      },
-      {
-        keys: ['taller', 'talleres'],
-        resp: `Hay dos tipos de talleres disponibles:<br><br>
-
-        <strong>Prácticos</strong> - cerveza artesanal, productos cosméticos y productos cárnicos<br>
-        Estudiantes: $1,500 | Público: $1,700<br><br>
-
-        <strong>Habilidades blandas</strong> - inteligencia emocional, imagen y educación financiera<br>
-        Estudiantes: $800 | Público: $1,000<br><br>
-
-        ¿Cuál te interesa más?`
-      },
-      {
-        keys: ['trabajos libres', 'oral', 'orales', 'carteles', 'poster', 'póster', 'mesa', 'mesas', 'resumenes', 'resúmenes', 'extenso', 'revista'],
-        resp: `<strong>Trabajos libres</strong><br><br>
-        21 de octubre de 2026<br><br>
-
-        <strong>Presentaciones orales 08:00-10:00</strong><br>
-        Centro Cultural<br><br>
-
-        Mesas:<br>
-        - Biotecnología e Ingeniería Ambiental<br>
-        - Alimentos<br>
-        - Microbiología Industrial e Ingeniería Ambiental<br><br>
-
-        <strong>Sección de carteles 10:00-12:00</strong><br>
-        Gimnasio Auditorio<br><br>
-
-        <strong>Fechas y notas importantes</strong><br>
-        - Límite de envío de resúmenes: 30 de septiembre<br>
-        - Publicación de resultados: 7 de octubre<br>
-        - Recepción de trabajos in extenso: 30 de octubre<br>
-        - Los 5 mejores trabajos de cada mesa se publicarán en un número especial del 50 Aniversario en Revista Pistas Educativas<br>
-        - Coordinador de Trabajos Libres: Dr. David Antonio Flores<br>
-        - Registro y envío: <a href="https://forms.gle/Ri6EDARKH68VC1MU7" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/Ri6EDARKH68VC1MU7</a>`
-      },
-      {
-        keys: ['foro', 'foros', 'laja', 'bajio', 'bajío', 'egresados', 'raul castro', 'raúl castro', 'gabriel marquez', 'gabriel márquez'],
-        resp: `<strong>Foros</strong><br><br>
-        21 de octubre de 2026<br>
-        Centro Cultural, 12:00-15:00<br><br>
-
-        <strong>Foro 1</strong> Celaya y la región Laja-Bajío: un polo de desarrollo, perspectivas y oportunidades<br>
-        Líderes empresariales de Celaya<br>
-        Moderador: Ing. Raúl Castro<br><br>
-
-        <strong>Foro 2</strong> Compartiendo nuestra experiencia y recordando nuestro Tecnológico<br>
-        Egresados<br>
-        Moderador: MC Gabriel Márquez Rojas`
-      },
-      {
-        keys: ['deporte', 'deportivo', 'deportivos', 'carrera', 'caminata', '5km', '10km', '3km', '3.0', 'correr', 'atletismo', 'maraton', 'maratón', 'futbol', 'fútbol', 'medalla', 'cronometraje'],
-        resp: `<strong>Eventos deportivos</strong><br><br>
-
-        <strong>Carrera conmemorativa</strong><br>
-        50 Aniversario de Ingeniería Bioquímica<br>
-        10.0, 5.0 y 3.0 km<br>
-        18 de octubre, 07:00<br>
-        Cancha de fútbol Tec de Celaya<br><br>
-
-        Incluye camiseta conmemorativa, número de participante, puntos de hidratación, medalla y cronometraje<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$450</strong><br>
-        Público en general: <strong>$550</strong>`
-      },
-      {
-        keys: ['cultural', 'culturales', 'cena mexicana', 'tamboreada', 'antojitos', 'mexicanos', 'folcloricos', 'folclóricos', 'musica', 'música', 'baile', 'bailes'],
-        resp: `<strong>Eventos culturales</strong><br><br>
-
-        <strong>Cena mexicana</strong><br>
-        50 Aniversario de Ingeniería Bioquímica<br>
-        22 de octubre, 18:00<br>
-        Patio principal del Tec Celaya<br><br>
-
-        Tamboreada, antojitos mexicanos, música y bailes folclóricos<br><br>
-
-        <strong>Costo:</strong><br>
-        Estudiantes: <strong>$400</strong><br>
-        Público en general: <strong>$550</strong>`
-      },
-      {
-        keys: ['souvenir', 'souvenirs', 'recuerdo', 'recuerdos', 'termo', 'taza', 'bata', 'playera', 'pin', 'regalo', 'mercancia', 'mercancía', 'producto'],
-        resp: `<strong>Souvenirs conmemorativos</strong><br><br>
-
-        <span class="tag">Termo</span> $300<br>
-        <span class="tag">Taza grande</span> $350<br>
-        <span class="tag">Taza chica / Pin</span> $60<br>
-        <span class="tag">Bata conmemorativa</span> Estudiantes: $550 | Público: $650<br>
-        <span class="tag">Playera conmemorativa</span> $200<br><br>
-
-        Lleva un recuerdo del 50 Aniversario.`
-      },
-      {
-        keys: ['registro', 'inscripcion', 'inscripción', 'inscribir', 'inscribirme', 'form', 'formulario', 'link', 'enlace', 'google form', 'forms'],
-        resp: `<strong>Registro e inscripciones</strong><br><br>
-        Accede al formulario oficial aquí:<br><br>
-        <a href="https://forms.gle/bwfAZFvtujNbSKN56" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/bwfAZFvtujNbSKN56</a><br><br>
-        No pierdas tu lugar. El evento es del <strong>19 al 23 de octubre de 2026</strong>.`
-      },
-      {
-        keys: ['costo', 'costos', 'precio', 'precios', 'cuanto', 'cuánto', 'vale', 'cuesta', 'pagar', 'pago', 'dinero', 'tarifa'],
-        resp: `<strong>Resumen de costos</strong><br><br>
-
-        <strong>Cursos matutinos</strong><br>
-        Estudiantes: $950 | Público: $1,200<br><br>
-
-        <strong>Cursos vespertinos</strong><br>
-        Estudiantes: $650 | Público: $900<br><br>
-
-        <strong>Talleres prácticos</strong><br>
-        Estudiantes: $1,500 | Público: $1,700<br><br>
-
-        <strong>Talleres de habilidades blandas</strong><br>
-        Estudiantes: $800 | Público: $1,000<br><br>
-
-        <strong>Carrera conmemorativa</strong><br>
-        Estudiantes: $450 | Público: $550<br><br>
-
-        <strong>Cena mexicana</strong><br>
-        Estudiantes: $400 | Público: $550<br><br>
-
-        <em>¿Quieres saber más sobre alguna actividad en particular?</em>`
-      },
-      {
-        keys: ['fecha', 'fechas', 'cuando', 'cuándo', 'dia', 'días', 'octubre', 'calendario', 'horario', 'programa'],
-        resp: `<strong>Fechas del evento</strong><br><br>
-        El congreso se llevará a cabo del <strong>19 al 23 de octubre de 2026</strong>.<br><br>
-        Además, habrá actividades especiales el <strong>18 de octubre</strong> con la carrera conmemorativa y el <strong>21 de octubre</strong> con trabajos libres y foros.`
-      },
-      {
-        keys: ['donde', 'dónde', 'lugar', 'sede', 'celaya', 'tecnm', 'tecnológico', 'instituto', 'campus', 'guanajuato', 'centro cultural', 'gimnasio', 'patio principal'],
-        resp: `<strong>Sede del evento</strong><br><br>
-        <strong>Tecnológico Nacional de México</strong><br>
-        Campus Celaya, Guanajuato<br><br>
-
-        Sedes según la actividad:<br>
-        - Centro Cultural<br>
-        - Gimnasio Auditorio<br>
-        - Cancha de fútbol Tec de Celaya<br>
-        - Patio principal del Tec Celaya`
-      },
-      {
-        keys: ['hola', 'buenas', 'buenos', 'buen', 'hey', 'que tal', 'qué tal', 'ola', 'hi', 'hello', 'saludos'],
-        resp: `Hola. Bienvenido al asistente oficial del <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
-        Puedo ayudarte con información sobre:<br>
-        - Cursos matutinos y vespertinos<br>
-        - Talleres prácticos y de habilidades blandas<br>
-        - Ceremonia de inauguración y conferencias magistrales<br>
-        - Trabajos libres y foros<br>
-        - Eventos deportivos y culturales<br>
-        - Souvenirs y precios<br>
-        - Registro e inscripción<br><br>
-        ¿Sobre qué quieres saber?`
-      },
-      {
-        keys: ['gracias', 'gracia', 'thanks', 'thank', 'perfecto', 'excelente', 'genial', 'bien', 'ok', 'listo'],
-        resp: `Con mucho gusto. Espero verte en el congreso del <strong>19 al 23 de octubre</strong>. ¿Hay algo más en lo que pueda ayudarte?`
-      },
-      {
-        keys: ['curso', 'cursos'],
-        resp: `Tenemos dos modalidades de cursos:<br><br>
-
-        <strong>Matutinos (M1-M5)</strong><br>
-        Estudiantes: $950 | Público: $1,200<br><br>
-
-        <strong>Vespertinos (V1-V5)</strong><br>
-        Estudiantes: $650 | Público: $900<br><br>
-
-        También hay ceremonia de inauguración, conferencias magistrales, trabajos libres, foros y eventos especiales.<br><br>
-        ¿Qué modalidad te interesa más?`
-      },
-      {
-        keys: ['evento', 'eventos', 'actividad', 'actividades', 'que hay', 'qué hay', 'que tiene', 'qué tiene', 'programa completo'],
-        resp: `<strong>Programa general del congreso</strong><br><br>
-        - Ceremonia de inauguración<br>
-        - Cursos matutinos (M1-M5)<br>
-        - Cursos vespertinos (V1-V5)<br>
-        - Talleres prácticos<br>
-        - Talleres de habilidades blandas<br>
-        - Conferencias magistrales<br>
-        - Trabajos libres<br>
-        - Foros<br>
-        - Carrera conmemorativa<br>
-        - Cena mexicana<br>
-        - Souvenirs conmemorativos<br><br>
-        ¿Sobre qué actividad quieres más detalle?`
+    for (const key of item.keys) {
+      const normalizedKey = normalize(key);
+      if (nq.includes(normalizedKey)) {
+        score += normalizedKey.split(' ').length;
       }
-    ];
-
-    function normalize(txt) {
-      return txt
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9\s]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
     }
 
-    function findAnswer(q) {
-      const nq = normalize(q);
-      let best = null;
-      let bestScore = 0;
-
-      for (const item of KB) {
-        let score = 0;
-
-        for (const key of item.keys) {
-          const normalizedKey = normalize(key);
-          if (nq.includes(normalizedKey)) {
-            score += normalizedKey.split(' ').length;
-          }
-        }
-
-        if (score > bestScore) {
-          bestScore = score;
-          best = item;
-        }
-      }
-
-      if (best && bestScore > 0) {
-        return best.resp;
-      }
-
-      return `Lo siento, no tengo información sobre eso.<br><br>
-      Puedo ayudarte con inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos deportivos, eventos culturales, souvenirs, costos y registro.<br><br>
-      ¿Quieres que te explique alguno de esos temas?`;
+    if (score > bestScore) {
+      bestScore = score;
+      best = item;
     }
+  }
 
-    const chatEl = document.getElementById('chat');
-    const inputEl = document.getElementById('user-input');
+  if (best && bestScore > 0) {
+    return best.resp;
+  }
 
-    function addMsg(text, who) {
-      const div = document.createElement('div');
-      div.className = `msg ${who}`;
+  return `Lo siento, no tengo información sobre eso.<br><br>
+  Puedo ayudarte con inauguración, cursos, talleres, costos y registro.`;
+}
 
-      const av = document.createElement('div');
-      av.className = `avatar ${who}`;
-      av.textContent = who === 'bot' ? 'IB' : 'U';
+const chatEl = document.getElementById('chat');
+const inputEl = document.getElementById('user-input');
 
-      const bub = document.createElement('div');
-      bub.className = 'bubble';
-      bub.innerHTML = text;
+function addMsg(text, who) {
+  const div = document.createElement('div');
+  div.className = `msg ${who}`;
 
-      if (who === 'bot') {
-        div.appendChild(av);
-        div.appendChild(bub);
-      } else {
-        div.appendChild(bub);
-        div.appendChild(av);
-      }
+  const av = document.createElement('div');
+  av.className = `avatar ${who}`;
+  av.textContent = who === 'bot' ? 'IB' : 'U';
 
-      chatEl.appendChild(div);
-      chatEl.scrollTop = chatEl.scrollHeight;
-      return div;
-    }
+  const bub = document.createElement('div');
+  bub.className = 'bubble';
+  bub.innerHTML = text;
 
-    function showTyping() {
-      const div = document.createElement('div');
-      div.className = 'msg bot';
-      div.id = 'typing-indicator';
-      div.innerHTML = `
-        <div class="avatar bot">IB</div>
-        <div class="bubble typing"><span></span><span></span><span></span></div>
-      `;
-      chatEl.appendChild(div);
-      chatEl.scrollTop = chatEl.scrollHeight;
-    }
+  if (who === 'bot') {
+    div.appendChild(av);
+    div.appendChild(bub);
+  } else {
+    div.appendChild(bub);
+    div.appendChild(av);
+  }
 
-    function removeTyping() {
-      const t = document.getElementById('typing-indicator');
-      if (t) t.remove();
-    }
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
 
-    function handleSend() {
-      const text = inputEl.value.trim();
-      if (!text) return;
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="avatar bot">IB</div><div class="bubble typing"><span></span><span></span><span></span></div>';
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
 
-      addMsg(text, 'user');
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
 
-      showTyping();
+function handleSend() {
+  const text = inputEl.value.trim();
+  if (!text) return;
 
-      setTimeout(() => {
-        removeTyping();
-        addMsg(findAnswer(text), 'bot');
-      }, 700);
-    }
+  addMsg(text, 'user');
+  inputEl.value = '';
+  inputEl.style.height = 'auto';
 
-    function sendChip(btn) {
-      const label = btn.textContent.trim();
-      inputEl.value = label;
-      handleSend();
-    }
+  showTyping();
 
-    inputEl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSend();
-      }
-    });
+  setTimeout(() => {
+    removeTyping();
+    addMsg(findAnswer(text), 'bot');
+  }, 700);
+}
 
-    inputEl.addEventListener('input', function () {
-      this.style.height = 'auto';
-      this.style.height = Math.min(this.scrollHeight, 100) + 'px';
-    });
+function sendChip(btn) {
+  const label = btn.textContent.trim();
+  inputEl.value = label;
+  handleSend();
+}
 
-    setTimeout(() => {
-      addMsg(`Bienvenido al congreso. Soy tu asistente para el <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
-      Estoy aquí para resolver tus dudas sobre inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos, costos e inscripciones. ¿Por dónde empezamos?`, 'bot');
-    }, 400);
-  </script>
+inputEl.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    handleSend();
+  }
+});
+
+inputEl.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+setTimeout(() => {
+  addMsg(`Bienvenido al congreso. Soy tu asistente para el <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
+  Estoy aquí para resolver tus dudas sobre inauguración, cursos, talleres, costos e inscripciones.`, 'bot');
+}, 400);
+</script>
 </body>
 </html>
