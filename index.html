@@ -1,435 +1,626 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chatbot - 50 Aniversario IB - TecNM Celaya</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --verde: #1a5c2a;
-      --verde-claro: #2d8a45;
-      --dorado: #c8960c;
-      --dorado-claro: #f0b429;
-      --crema: #faf7f0;
-      --gris: #f0ede6;
-      --texto: #1a1a1a;
-      --burbuja-bot: #ffffff;
-      --burbuja-user: #1a5c2a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot · 50 Aniversario IB · TecNM Celaya</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a5c2a;
+    --verde-claro: #2d8a45;
+    --dorado: #c8960c;
+    --dorado-claro: #f0b429;
+    --crema: #faf7f0;
+    --gris: #f0ede6;
+    --texto: #1a1a1a;
+    --burbuja-bot: #ffffff;
+    --burbuja-user: #1a5c2a;
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--crema);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    header {
-      width: 100%;
-      background: linear-gradient(135deg, var(--verde) 0%, #0f3d1a 60%, #1a5c2a 100%);
-      padding: 18px 24px 14px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      position: relative;
-      overflow: hidden;
-    }
+  header {
+    width: 100%;
+    background: linear-gradient(135deg, var(--verde) 0%, #0f3d1a 60%, #1a5c2a 100%);
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: -30px;
-      right: -30px;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: rgba(200,150,12,0.15);
-    }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(200,150,12,0.15);
+  }
 
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 30%;
-      width: 200px;
-      height: 60px;
-      background: rgba(200,150,12,0.08);
-      border-radius: 50%;
-    }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 30%;
+    width: 200px;
+    height: 60px;
+    background: rgba(200,150,12,0.08);
+    border-radius: 50%;
+  }
 
-    .logo-circle {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: var(--dorado);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 900;
-      color: white;
-      flex-shrink: 0;
-      box-shadow: 0 2px 12px rgba(200,150,12,0.4);
-      z-index: 1;
-    }
+  .logo-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--dorado);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(200,150,12,0.4);
+    z-index: 1;
+  }
 
-    .header-text {
-      z-index: 1;
-    }
+  .header-text { z-index: 1; }
 
-    .header-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      color: var(--dorado-claro);
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-    }
+  .header-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--dorado-claro);
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
 
-    .header-text p {
-      font-size: 11px;
-      color: rgba(255,255,255,0.75);
-      margin-top: 2px;
-    }
+  .header-text p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 2px;
+  }
 
-    .badge {
-      margin-left: auto;
-      background: rgba(200,150,12,0.25);
-      border: 1px solid var(--dorado);
-      color: var(--dorado-claro);
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 20px;
-      z-index: 1;
-      white-space: nowrap;
-    }
+  .badge {
+    margin-left: auto;
+    background: rgba(200,150,12,0.25);
+    border: 1px solid var(--dorado);
+    color: var(--dorado-claro);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    z-index: 1;
+    white-space: nowrap;
+  }
 
-    #chat {
-      flex: 1;
-      width: 100%;
-      max-width: 700px;
-      padding: 20px 16px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      overflow-y: auto;
-      min-height: 0;
-      max-height: calc(100vh - 260px);
-    }
+  #chat {
+    flex: 1;
+    width: 100%;
+    max-width: 700px;
+    padding: 20px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    min-height: 0;
+    max-height: calc(100vh - 260px);
+  }
 
-    .msg {
-      display: flex;
-      gap: 10px;
-      animation: fadeUp 0.3s ease both;
-    }
+  .msg {
+    display: flex;
+    gap: 10px;
+    animation: fadeUp 0.3s ease both;
+  }
 
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-    .msg.user {
-      flex-direction: row-reverse;
-    }
+  .msg.user { flex-direction: row-reverse; }
 
-    .avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
 
-    .avatar.bot {
-      background: var(--verde);
-      color: white;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 14px;
-    }
+  .avatar.bot {
+    background: var(--verde);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
 
-    .avatar.user {
-      background: var(--dorado);
-      color: white;
-      font-size: 16px;
-    }
+  .avatar.user {
+    background: var(--dorado);
+    color: white;
+    font-size: 16px;
+  }
 
-    .bubble {
-      max-width: 78%;
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 14px;
-      line-height: 1.6;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    }
+  .bubble {
+    max-width: 78%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    word-break: break-word;
+  }
 
-    .msg.bot .bubble {
-      background: var(--burbuja-bot);
-      color: var(--texto);
-      border-bottom-left-radius: 4px;
-      border: 1px solid rgba(0,0,0,0.07);
-    }
+  .msg.bot .bubble {
+    background: var(--burbuja-bot);
+    color: var(--texto);
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
 
-    .msg.user .bubble {
-      background: var(--burbuja-user);
-      color: white;
-      border-bottom-right-radius: 4px;
-    }
+  .msg.user .bubble {
+    background: var(--burbuja-user);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
 
-    .bubble strong {
-      color: var(--verde);
-    }
+  .bubble strong { color: var(--verde); }
+  .msg.user .bubble strong { color: var(--dorado-claro); }
 
-    .msg.user .bubble strong {
-      color: var(--dorado-claro);
-    }
+  .bubble .tag {
+    display: inline-block;
+    background: var(--gris);
+    color: var(--verde);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin: 2px 2px;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
 
-    .bubble .tag {
-      display: inline-block;
-      background: var(--gris);
-      color: var(--verde);
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin: 2px 2px;
-      border: 1px solid rgba(0,0,0,0.08);
-    }
+  .typing span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--verde-claro);
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: bounce 1.2s infinite;
+  }
 
-    .typing span {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: var(--verde-claro);
-      border-radius: 50%;
-      margin: 0 2px;
-      animation: bounce 1.2s infinite;
-    }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
 
-    .typing span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
+  @keyframes bounce {
+    0%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
 
-    .typing span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
+  #chips {
+    width: 100%;
+    max-width: 700px;
+    padding: 0 16px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
 
-    @keyframes bounce {
-      0%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-6px);
-      }
-    }
+  .chip {
+    background: white;
+    border: 1.5px solid var(--verde);
+    color: var(--verde);
+    font-size: 12px;
+    padding: 6px 13px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
 
-    #chips {
-      width: 100%;
-      max-width: 700px;
-      padding: 0 16px 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
+  .chip:hover {
+    background: var(--verde);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(26,92,42,0.25);
+  }
 
-    .chip {
-      background: white;
-      border: 1.5px solid var(--verde);
-      color: var(--verde);
-      font-size: 12px;
-      padding: 6px 13px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
+  #input-area {
+    width: 100%;
+    max-width: 700px;
+    padding: 10px 16px 20px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
 
-    .chip:hover {
-      background: var(--verde);
-      color: white;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(26,92,42,0.25);
-    }
+  #user-input {
+    flex: 1;
+    border: 2px solid rgba(26,92,42,0.2);
+    border-radius: 24px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    background: white;
+    resize: none;
+    max-height: 100px;
+    overflow-y: auto;
+    transition: border-color 0.2s;
+    color: var(--texto);
+  }
 
-    #input-area {
-      width: 100%;
-      max-width: 700px;
-      padding: 10px 16px 20px;
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
+  #user-input:focus { border-color: var(--verde); }
+  #user-input::placeholder { color: #aaa; }
 
-    #user-input {
-      flex: 1;
-      border: 2px solid rgba(26,92,42,0.2);
-      border-radius: 24px;
-      padding: 12px 18px;
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      outline: none;
-      background: white;
-      resize: none;
-      max-height: 100px;
-      overflow-y: auto;
-      transition: border-color 0.2s;
-      color: var(--texto);
-    }
+  #send-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--verde);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    box-shadow: 0 3px 12px rgba(26,92,42,0.35);
+  }
 
-    #user-input:focus {
-      border-color: var(--verde);
-    }
+  #send-btn:hover {
+    background: var(--verde-claro);
+    transform: scale(1.05);
+  }
 
-    #user-input::placeholder {
-      color: #aaa;
-    }
+  #send-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
 
-    #send-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: var(--verde);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s;
-      box-shadow: 0 3px 12px rgba(26,92,42,0.35);
-    }
+  .footer-note {
+    font-size: 10px;
+    color: #aaa;
+    text-align: center;
+    padding-bottom: 6px;
+  }
 
-    #send-btn:hover {
-      background: var(--verde-claro);
-      transform: scale(1.05);
-    }
-
-    #send-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-
-    .footer-note {
-      font-size: 10px;
-      color: #aaa;
-      text-align: center;
-      padding-bottom: 6px;
-    }
-
-    #chat::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    #chat::-webkit-scrollbar-thumb {
-      background: rgba(26,92,42,0.2);
-      border-radius: 4px;
-    }
-  </style>
+  #chat::-webkit-scrollbar { width: 4px; }
+  #chat::-webkit-scrollbar-thumb {
+    background: rgba(26,92,42,0.2);
+    border-radius: 4px;
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo-circle">IB</div>
-    <div class="header-text">
-      <h1>50 Aniversario - Ingeniería Bioquímica</h1>
-      <p>TecNM Celaya - 19 al 23 de octubre de 2026</p>
-    </div>
-    <span class="badge">En línea</span>
-  </header>
-
-  <div id="chat"></div>
-
-  <div id="chips">
-    <button class="chip" onclick="sendChip(this)">Cursos matutinos</button>
-    <button class="chip" onclick="sendChip(this)">Cursos vespertinos</button>
-    <button class="chip" onclick="sendChip(this)">Talleres prácticos</button>
-    <button class="chip" onclick="sendChip(this)">Talleres de habilidades blandas</button>
-    <button class="chip" onclick="sendChip(this)">Eventos deportivos</button>
-    <button class="chip" onclick="sendChip(this)">Eventos culturales</button>
-    <button class="chip" onclick="sendChip(this)">Souvenirs</button>
-    <button class="chip" onclick="sendChip(this)">Costos y precios</button>
-    <button class="chip" onclick="sendChip(this)">Registro e inscripción</button>
-    <button class="chip" onclick="sendChip(this)">Inauguración</button>
-    <button class="chip" onclick="sendChip(this)">Trabajos libres</button>
+<header>
+  <div class="logo-circle">IB</div>
+  <div class="header-text">
+    <h1>50 Aniversario · Ingeniería Bioquímica</h1>
+    <p>TecNM Celaya · 19–23 de Octubre, 2026</p>
   </div>
+  <span class="badge">🟢 En línea</span>
+</header>
 
-  <div id="input-area">
-    <textarea id="user-input" rows="1" placeholder="Escribe tu pregunta sobre el congreso..."></textarea>
-    <button id="send-btn" onclick="handleSend()" aria-label="Enviar">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-    </button>
-  </div>
+<div id="chat"></div>
 
-  <p class="footer-note">Sin internet - Sin API - 100% local</p>
+<div id="chips">
+  <button class="chip" onclick="sendChip(this)">📚 Cursos matutinos</button>
+  <button class="chip" onclick="sendChip(this)">🌆 Cursos vespertinos</button>
+  <button class="chip" onclick="sendChip(this)">🔧 Talleres practicos</button>
+  <button class="chip" onclick="sendChip(this)">💡 Talleres habilidades blandas</button>
+  <button class="chip" onclick="sendChip(this)">🏃 Eventos deportivos</button>
+  <button class="chip" onclick="sendChip(this)">🎉 Eventos culturales</button>
+  <button class="chip" onclick="sendChip(this)">🎁 Souvenirs</button>
+  <button class="chip" onclick="sendChip(this)">💰 Costos y precios</button>
+  <button class="chip" onclick="sendChip(this)">📝 Registro e inscripción</button>
+  <button class="chip" onclick="sendChip(this)">📝 Inauguración</button>
+  <button class="chip" onclick="sendChip(this)">📝 Trabajos libres</button>
+</div>
 
- }
+<div id="input-area">
+  <textarea id="user-input" rows="1" placeholder="Escribe tu pregunta sobre el congreso..."></textarea>
+  <button id="send-btn" onclick="handleSend()">
+    <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+  </button>
+</div>
 
-También te recomiendo reemplazar tu bloque JavaScript completo por este, ya corregido y estable:
+<p class="footer-note">Sin internet · Sin API · 100% local</p>
 
 <script>
+// =============================================
+// BASE DE CONOCIMIENTO DEL CONGRESO
+// =============================================
 const KB = [
   {
     keys: ['inauguracion','inauguración','ceremonia','apertura','inicio','arranque'],
-    resp: `<strong>Ceremonia de inauguración</strong><br><br>
-    19 de octubre de 2026<br>
-    12:00-13:00<br>
-    Centro Cultural`
+    resp: `<strong>Ceremonia de Inauguración</strong><br><br>
+19 de octubre de 2026<br>
+12:00-13:00<br>
+Centro Cultural`
+  },
+  {
+    keys: ['conferencia','conferencias','magistral','magistrales','ponente','ponentes','enrique galindo','victor barrera','víctor barrera','antonio de leon','antonio de león','luis herrera'],
+    resp: `<strong>Conferencias Magistrales</strong><br><br>
+1. 50 años de Ingeniería Bioquímica<br>
+Dr. Enrique Galindo Fentanes<br>
+19 de octubre 13:00-14:00<br><br>
+2. Día de muertos: Origen y simbolismo<br>
+Dr. Víctor Barrera Patiño<br>
+20 de octubre 13:00-14:00<br><br>
+3. Contaminantes emergentes desde la industria hasta sus efectos celulares y moleculares<br>
+Dr. Antonio de León Rodríguez<br>
+22 de octubre 13:00-14:00<br><br>
+4. El desarrollo de la biotecnología, su presente y futuro<br>
+Dr. Luis Herrera Estrella<br>
+23 de octubre 12:00-13:00<br><br>
+Centro Cultural`
+  },
+  {
+    keys: ['matutino','matutinos','mañana','m1','m2','m3','m4','m5','bioestimulantes','leche','lacteos','lácteos','carne','microorganismos','inocuidad','saneamiento'],
+    resp: `<strong>Cursos Matutinos 🌅</strong><br><br>
+Horario general: 19, 20, 22 y 23 de octubre, 09:00-13:00<br><br>
+<span class="tag">M1</span> Bioestimulantes agrícolas: Principios, aplicaciones y tendencias<br>
+Dr. Ramón Gerardo Guevara González, UAQ<br><br>
+<span class="tag">M2</span> Ciencia y tecnología de la leche y productos lácteos<br>
+Dra. Mirna L. Gigante, Campinas, Brasil<br><br>
+<span class="tag">M3</span> Hablando de carne, somos mais com carne<br>
+Dr. Sérgio Bertelli Pflanzer, Campinas, Brasil<br><br>
+<span class="tag">M4</span> Aspectos fisiológicos de la interacción planta-microorganismos<br>
+Dra. Aline Coqueiro, Paraná, Brasil<br><br>
+<span class="tag">M5</span> Enfoques modernos para el saneamiento y la inocuidad de alimentos<br>
+Dr. Alejandro Castillo Ayala, Texas, EUA<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$950</strong><br>
+• Público en General: <strong>$1,200</strong>`
+  },
+  {
+    keys: ['vespertino','vespertinos','tarde','v1','v2','v21','v22','v23','v24','v3','v4','v5','biotecnologia','biotecnología','bioquimico','bioquímico','microbios','cromatografia','cromatografía','ia','iot'],
+    resp: `<strong>Cursos Vespertinos 🌤️</strong><br><br>
+Horario general: 19, 20, 21 y 22 de octubre 15:00-19:00<br><br>
+<span class="tag">V1</span> El poder de la Biotecnología<br>
+Dr. Guillermo Antonio Silva Martínez, TecNM Celaya<br><br>
+<span class="tag">V2</span> Yo soy Bioquímico<br>
+<span class="tag">V21</span> Aplicaciones de la biotecnología en la solución de problemas agrícolas<br>
+Dr. José Luis Anaya López, INIFAP Bajío<br>
+<span class="tag">V22</span> ¿Cómo emprender proyectos con base tecnológica?<br>
+Dra. Sandra Isabel González Morales, Hados Biotec<br>
+<span class="tag">V23</span> El Ingeniero Bioquímico en los retos de la industria cárnica<br>
+IBQ Francisco Javier Balderas Almanza, JB-Delicatessen<br>
+<span class="tag">V24</span> Importancia de los ingredientes en la industria alimentaria moderna<br>
+IBQ Erika Zamacona Gutiérrez, Asesor Industrial<br><br>
+<span class="tag">V3</span> De Cazadores de microbios a Cazadores moleculares<br>
+Dr. Humberto Ramírez Medina, TecNM Celaya<br>
+Dr. Luis R. Rodríguez Ortiz<br><br>
+<span class="tag">V4</span> Agricultura climáticamente resiliente: aprovechando las tecnologías emergentes IA y IoT<br>
+Dra. Ma. del Carmen Orozco Mosqueda, TecNM Celaya<br><br>
+<span class="tag">V5</span> Curso y taller de cromatografía<br>
+MC José Ramón Castellanos Castro, TecNM Celaya<br>
+MC Teresa Maldonado Mancera, TecNM Celaya<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$650</strong><br>
+• Público en General: <strong>$900</strong>`
+  },
+  {
+    keys: ['hard skill','hard skills','taller hard','cerveza','carnicos','cárnicos','tv2','tv3','talleres practicos','talleres prácticos','cosmeticos','cosméticos'],
+    resp: `<strong>Talleres practicos 🔬</strong><br><br>
+<span class="tag">TV2</span> Taller de elaboración de cerveza artesanal<br>
+Dr. Ahuízotl de Jesús Joaquín Ramos, TecNM Roque<br><br>
+<span class="tag">TV3</span> Taller de elaboración de productos cárnicos<br>
+Dra. Soraya Covarrubias Carapia, TecNM Celaya<br>
+Ing. Martha Tierra Blanca, TecNM Celaya<br><br>
+<span class="tag">TM3</span> Taller de productos cosméticos<br>
+Mtra. Ruth Trejo Tasha Nicolle<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$1,500</strong><br>
+• Público en General: <strong>$1,700</strong>`
+  },
+  {
+    keys: ['soft skill','talleres habilidades blandas','talleres de habilidades blandas','soft skills','taller soft','emocional','inteligencia emocional','educacion financiera','educación financiera','imagen','bata','tm1','tm2','tm3','tv1','cosmeticos','cosméticos'],
+    resp: `<strong>Talleres habilidades blandas 💡</strong><br><br>
+<strong>Matutinos (19, 20, 22, 23 de octubre, 09:00-13:00)</strong><br>
+<span class="tag">TM1</span> Inteligencia Emocional<br>
+Mtra. Mercedes García Pescador, U.Gto.<br><br>
+<span class="tag">TM2</span> Más que tu bata, tu imagen habla por ti<br>
+Mtra. Araceli Cano Belman, TecNM Celaya<br><br>
+<strong>Vespertinos (19, 20, 21, 22 de octubre, 15:00-19:00)</strong><br>
+<span class="tag">TV1</span> Educación Financiera<br>
+Paulina Espinoza Pérez Grovas, Asesor en Finanzas Allianz México<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$800</strong><br>
+• Público en General: <strong>$1,000</strong>`
+  },
+  {
+    keys: ['taller','talleres'],
+    resp: `Hay dos tipos de talleres disponibles:<br><br>
+🔧 <strong>Prácticos</strong> — cerveza artesanal, productos cosméticos y productos cárnicos<br>
+• Estudiantes: $1,500 | Público: $1,700<br><br>
+💡 <strong>Habilidades blandas</strong> — inteligencia emocional, imagen y educación financiera<br>
+• Estudiantes: $800 | Público: $1,000<br><br>
+¿Cuál te interesa más?`
+  },
+  {
+    keys: ['trabajos libres','oral','orales','carteles','poster','póster','mesa','mesas','resumenes','resúmenes','extenso','revista'],
+    resp: `<strong>Trabajos Libres</strong><br><br>
+21 de octubre 2026<br><br>
+<strong>Presentaciones orales 8:00-10:00</strong><br>
+Centro Cultural<br><br>
+Mesas:<br>
+• Biotecnología e Ingeniería Ambiental<br>
+• Alimentos<br>
+• Microbiología Industrial e Ingeniería Ambiental<br><br>
+<strong>Sección de Carteles 10:00-12:00</strong><br>
+Gimnasio Auditorio<br><br>
+<strong>Fechas y Notas Importantes</strong><br>
+- Límite de envío de resúmenes: 30 de septiembre<br>
+- Publicación de resultados: 7 de octubre<br>
+- Recepción de trabajos in extenso: 30 de octubre<br>
+- Los 5 mejores trabajos de cada mesa se publicarán en un número especial de 50 Aniversario en Revista Pistas Educativas<br>
+- Coordinador de Trabajos Libres: Dr. David Antonio Flores<br>
+- REGISTRO Y ENVÍO: <a href="https://forms.gle/Ri6EDARKH68VC1MU7" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/Ri6EDARKH68VC1MU7</a>`
+  },
+  {
+    keys: ['foro','foros','laja','bajio','bajío','egresados','raul castro','raúl castro','gabriel marquez','gabriel márquez'],
+    resp: `<strong>Foros</strong><br><br>
+21 de octubre 2026<br>
+Centro Cultural 12:00-15:00<br><br>
+<strong>Foro 1</strong> Celaya y la región Laja-Bajío, un Polo de Desarrollo: Perspectivas y oportunidades<br>
+Líderes empresariales de Celaya<br>
+Moderador: Ing. Raúl Castro<br><br>
+<strong>Foro 2</strong> Compartiendo nuestra experiencia y recordando nuestro Tecnológico<br>
+Egresados<br>
+Moderador: MC Gabriel Márquez Rojas`
+  },
+  {
+    keys: ['deporte','deportivo','deportivos','carrera','caminata','5km','10km','3km','3.0','correr','atletismo','maraton','maratón','futbol','fútbol','medalla','cronometraje'],
+    resp: `<strong>Eventos Deportivos 🏃</strong><br><br>
+<strong>Carrera Conmemorativa</strong><br>
+50 Aniversario de Ingeniería Bioquímica<br>
+10.0, 5.0 y 3.0 Km<br>
+18 de octubre, 7:00am<br>
+Cancha de Futbol Tec de Celaya<br><br>
+Incluye camiseta conmemorativa, número de participante, puntos de hidratación, medalla y cronometraje<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$450</strong><br>
+• Público en General: <strong>$550</strong>`
+  },
+  {
+    keys: ['cultural','culturales','cena mexicana','tamboreada','antojitos','mexicanos','folcloricos','folclóricos','musica','música','baile','bailes'],
+    resp: `<strong>Eventos Culturales 🎉</strong><br><br>
+<strong>Cena Mexicana</strong><br>
+50 Aniversario de Ingeniería Bioquímica<br>
+22 de octubre, 6:00pm<br>
+Patio principal del Tec Celaya<br><br>
+Tamboreada, antojitos mexicanos, música y bailes folclóricos<br><br>
+💰 <strong>Costo:</strong><br>
+• Estudiantes: <strong>$400</strong><br>
+• Público en General: <strong>$550</strong>`
+  },
+  {
+    keys: ['souvenir','souvenirs','recuerdo','recuerdos','termo','taza','bata','playera','pin','regalo','mercancia','mercancía','producto'],
+    resp: `<strong>Souvenirs Conmemorativos 🎁</strong><br><br>
+<span class="tag">Termo</span> $300<br>
+<span class="tag">Taza grande</span> $350<br>
+<span class="tag">Taza chica / Pin</span> $60<br>
+<span class="tag">Bata Conmemorativa</span> Estudiantes: $550 | Público: $650<br>
+<span class="tag">Playera Conmemorativa</span> $200<br><br>
+¡Lleva un recuerdo del 50 Aniversario! 🎓`
   },
   {
     keys: ['registro','inscripcion','inscripción','inscribir','inscribirme','form','formulario','link','enlace','google form','forms'],
-    resp: `<strong>Registro e inscripciones</strong><br><br>
-    Accede al formulario oficial aquí:<br><br>
-    <a href="https://forms.gle/bwfAZFvtujNbSKN56" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/bwfAZFvtujNbSKN56</a><br><br>
-    No pierdas tu lugar. El evento es del <strong>19 al 23 de octubre de 2026</strong>.`
+    resp: `<strong>Registro e Inscripciones 📝</strong><br><br>
+Accede al formulario oficial aquí:<br><br>
+🔗 <a href="https://forms.gle/bwfAZFvtujNbSKN56" target="_blank" style="color:var(--verde);font-weight:600;word-break:break-all;">https://forms.gle/bwfAZFvtujNbSKN56</a><br><br>
+¡No pierdas tu lugar! El evento es del <strong>19 al 23 de octubre de 2026</strong>.`
   },
   {
     keys: ['costo','costos','precio','precios','cuanto','cuánto','vale','cuesta','pagar','pago','dinero','tarifa'],
-    resp: `<strong>Resumen de costos</strong><br><br>
-    <strong>Cursos matutinos</strong><br>
-    Estudiantes: $950 | Público: $1,200<br><br>
-    <strong>Cursos vespertinos</strong><br>
-    Estudiantes: $650 | Público: $900<br><br>
-    <strong>Talleres prácticos</strong><br>
-    Estudiantes: $1,500 | Público: $1,700<br><br>
-    <strong>Talleres de habilidades blandas</strong><br>
-    Estudiantes: $800 | Público: $1,000<br><br>
-    <strong>Carrera conmemorativa</strong><br>
-    Estudiantes: $450 | Público: $550<br><br>
-    <strong>Cena mexicana</strong><br>
-    Estudiantes: $400 | Público: $550`
+    resp: `<strong>Resumen de Costos 💰</strong><br><br>
+<strong>Cursos Matutinos</strong><br>
+• Estudiantes: $950 | Público: $1,200<br><br>
+<strong>Cursos Vespertinos</strong><br>
+• Estudiantes: $650 | Público: $900<br><br>
+<strong>Talleres Hard Skills</strong><br>
+• Estudiantes: $1,500 | Público: $1,700<br><br>
+<strong>Talleres Soft Skills</strong><br>
+• Estudiantes: $800 | Público: $1,000<br><br>
+<strong>Carrera Conmemorativa</strong><br>
+• Estudiantes: $450 | Público: $550<br><br>
+<strong>Cena Mexicana</strong><br>
+• Estudiantes: $400 | Público: $550<br><br>
+<em>¿Quieres saber más sobre algún evento en particular?</em>`
   },
   {
-    keys: ['hola','buenas','buenos','hey','saludos'],
-    resp: `Hola. Bienvenido al asistente oficial del <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
-    ¿Sobre qué quieres saber?`
+    keys: ['fecha','fechas','cuando','cuándo','dia','días','octubre','calendario','horario','programa'],
+    resp: `<strong>Fechas del Evento 📅</strong><br><br>
+El congreso se llevará a cabo del<br>
+🗓️ <strong>19 al 23 de Octubre de 2026</strong><br><br>
+Además habrá actividades especiales el <strong>18 de octubre</strong> con la carrera conmemorativa y el <strong>21 de octubre</strong> con trabajos libres y foros.`
+  },
+  {
+    keys: ['donde','dónde','lugar','sede','celaya','tecnm','tecnológico','instituto','campus','guanajuato','centro cultural','gimnasio','patio principal'],
+    resp: `<strong>Sede del Evento 📍</strong><br><br>
+<strong>Tecnológico Nacional de México</strong><br>
+Campus Celaya, Guanajuato<br><br>
+Sedes según actividad:<br>
+• Centro Cultural<br>
+• Gimnasio Auditorio<br>
+• Cancha de Futbol Tec de Celaya<br>
+• Patio principal del Tec Celaya`
+  },
+  {
+    keys: ['hola','buenas','buenos','buen','hey','que tal','qué tal','ola','hi','hello','saludos'],
+    resp: `¡Hola! 👋 Bienvenido al asistente oficial del <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
+Puedo ayudarte con información sobre:<br>
+• 📚 Cursos matutinos y vespertinos<br>
+• 🔧 Talleres Hard y Soft Skills<br>
+• 🎤 Ceremonia de Inauguración y Conferencias Magistrales<br>
+• 🧪 Trabajos libres y foros<br>
+• 🏃 Eventos deportivos y culturales<br>
+• 🎁 Souvenirs y 💰 precios<br>
+• 📝 Registro e inscripción<br><br>
+¿Sobre qué quieres saber?`
+  },
+  {
+    keys: ['gracias','gracia','thanks','thank','perfecto','excelente','genial','bien','ok','listo'],
+    resp: `¡Con mucho gusto! 😊 Espero verte en el congreso del <strong>19 al 23 de octubre</strong>. ¿Hay algo más en lo que pueda ayudarte?`
+  },
+  {
+    keys: ['curso','cursos'],
+    resp: `Tenemos dos modalidades de cursos:<br><br>
+🌅 <strong>Matutinos (M1–M5)</strong><br>
+• Estudiantes: $950 | Público: $1,200<br><br>
+🌤️ <strong>Vespertinos (V1–V5)</strong><br>
+• Estudiantes: $650 | Público: $900<br><br>
+También hay ceremonia de inauguración, conferencias magistrales, trabajos libres, foros y eventos especiales.<br><br>
+¿Cuál modalidad te interesa más?`
+  },
+  {
+    keys: ['evento','eventos','actividad','actividades','que hay','qué hay','que tiene','qué tiene','programa completo'],
+    resp: `<strong>Programa General del Congreso 🎓</strong><br><br>
+🎉 Ceremonia de Inauguración<br>
+📚 Cursos Matutinos (M1–M5)<br>
+🌆 Cursos Vespertinos (V1–V5)<br>
+🔧 Talleres Hard Skills<br>
+💡 Talleres Soft Skills<br>
+🎤 Conferencias Magistrales<br>
+🧪 Trabajos Libres<br>
+🗣️ Foros<br>
+🏃 Carrera Conmemorativa<br>
+🎉 Cena Mexicana<br>
+🎁 Souvenirs conmemorativos<br><br>
+¿Sobre qué actividad quieres más detalle?`
   }
 ];
 
+// =============================================
+// MOTOR DE BÚSQUEDA
+// =============================================
 function normalize(txt) {
   return txt
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/[^\w\s]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -443,9 +634,9 @@ function findAnswer(q) {
     let score = 0;
 
     for (const key of item.keys) {
-      const normalizedKey = normalize(key);
-      if (nq.includes(normalizedKey)) {
-        score += normalizedKey.split(' ').length;
+      const nk = normalize(key);
+      if (nq.includes(nk)) {
+        score += nk.split(' ').length;
       }
     }
 
@@ -455,14 +646,16 @@ function findAnswer(q) {
     }
   }
 
-  if (best && bestScore > 0) {
-    return best.resp;
-  }
+  if (best && bestScore > 0) return best.resp;
 
-  return `Lo siento, no tengo información sobre eso.<br><br>
-  Puedo ayudarte con inauguración, cursos, talleres, costos y registro.`;
+  return `Lo siento, no tengo información sobre eso. 🤔<br><br>
+Puedo ayudarte con ceremonia de inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos deportivos, culturales, souvenirs, costos y registro.<br>
+¿Quieres que te explique alguno de esos temas?`;
 }
 
+// =============================================
+// INTERFAZ
+// =============================================
 const chatEl = document.getElementById('chat');
 const inputEl = document.getElementById('user-input');
 
@@ -472,7 +665,7 @@ function addMsg(text, who) {
 
   const av = document.createElement('div');
   av.className = `avatar ${who}`;
-  av.textContent = who === 'bot' ? 'IB' : 'U';
+  av.textContent = who === 'bot' ? 'IB' : '👤';
 
   const bub = document.createElement('div');
   bub.className = 'bubble';
@@ -488,13 +681,14 @@ function addMsg(text, who) {
 
   chatEl.appendChild(div);
   chatEl.scrollTop = chatEl.scrollHeight;
+  return div;
 }
 
 function showTyping() {
   const div = document.createElement('div');
   div.className = 'msg bot';
   div.id = 'typing-indicator';
-  div.innerHTML = '<div class="avatar bot">IB</div><div class="bubble typing"><span></span><span></span><span></span></div>';
+  div.innerHTML = `<div class="avatar bot">IB</div><div class="bubble typing"><span></span><span></span><span></span></div>`;
   chatEl.appendChild(div);
   chatEl.scrollTop = chatEl.scrollHeight;
 }
@@ -513,11 +707,10 @@ function handleSend() {
   inputEl.style.height = 'auto';
 
   showTyping();
-
   setTimeout(() => {
     removeTyping();
     addMsg(findAnswer(text), 'bot');
-  }, 700);
+  }, 600 + Math.random() * 400);
 }
 
 function sendChip(btn) {
@@ -526,6 +719,7 @@ function sendChip(btn) {
   handleSend();
 }
 
+// Enter para enviar, Shift+Enter para nueva línea
 inputEl.addEventListener('keydown', function(e) {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -533,14 +727,16 @@ inputEl.addEventListener('keydown', function(e) {
   }
 });
 
+// Auto-resize textarea
 inputEl.addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 100) + 'px';
 });
 
+// Mensaje de bienvenida
 setTimeout(() => {
-  addMsg(`Bienvenido al congreso. Soy tu asistente para el <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
-  Estoy aquí para resolver tus dudas sobre inauguración, cursos, talleres, costos e inscripciones.`, 'bot');
+  addMsg(`¡Bienvenido al congreso! 🎓 Soy tu asistente para el <strong>50 Aniversario de Ingeniería Bioquímica</strong> del TecNM Celaya.<br><br>
+Estoy aquí para resolver tus dudas sobre inauguración, cursos, talleres, conferencias, trabajos libres, foros, eventos, costos e inscripciones. ¿Por dónde empezamos?`, 'bot');
 }, 400);
 </script>
 </body>
